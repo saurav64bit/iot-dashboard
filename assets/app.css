@@ -1,0 +1,145 @@
+body{
+    font-size: 1.5em;
+    line-height: 1.6;
+    font-weight: 400;
+    font-family: Raleway,HelveticaNeue,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    color: #222;
+}
+
+.banner {
+    height: 75px;
+    margin: 0px -10px 10px;
+    background-color: rgb(66, 196, 247);
+    border-radius: 2px;
+}
+
+.banner h2{
+    color: white;
+    padding-top: 10px;
+    margin-left: 2%;
+    display: inline-block;
+}
+
+.banner Img{
+    position: relative;
+    float: right;
+    right: 10px;
+    height: 75px;
+}
+
+.graph-row .Title{
+  border-bottom: 1px solid rgb(216, 216, 216);
+}
+
+.graph-row .Title h3{
+    font-size: 1.75rem;
+    color: rgb(66, 196, 247);
+    border-bottom: rgb(216, 216, 216);
+    margin-top: 3px;
+    margin-left: 10px;
+    margin-bottom: 3px;
+}
+
+.graph-row {
+    border-radius: 5px;
+    border-width: 1px 1px 0px;
+    border-top-style: solid;
+    border-right-style: solid;
+    border-bottom-style: initial;
+    border-left-style: solid;
+    border-top-color: rgb(216, 216, 216);
+    border-right-color: rgb(216, 216, 216);
+    border-bottom-color: initial;
+    border-left-color: rgb(216, 216, 216);
+    border-image: initial;
+}
+
+.dashboard-container .dashboard-container-graph .Title h3{
+    font-size: 1.75rem;
+    color: rgb(66, 196, 247);
+    border-bottom: rgb(216, 216, 216);
+    margin-top: 3px;
+    margin-left: 10px;
+    margin-bottom: 3px;
+}
+
+.dashboard-container .dashboard-container-graph .Title{
+    border-bottom: 1px solid rgb(216, 216, 216);
+}
+
+
+.dashboard-container .dashboard-container-graph .bin-size {
+    font-size: small;
+    right: 65px;
+    top: 50px;
+    float: right;
+    z-index: 10000000;
+    position: relative;
+    font-family: Raleway;
+    margin: 0px;
+    display: inline-block;
+}
+
+.dashboard-container .dashboard-container-graph .bin-auto{
+    font-size: small;
+    top: 45px;
+    z-index: 1000000;
+    position: relative;
+    display: inline-block;
+    left: 90px;
+}
+
+.dashboard-container .dashboard-container-graph .js-plotly-plot .plot-container .svg-container .modebar{
+    z-index: -100;
+}
+
+.graph-row .graph .js-plotly-plot .plot-container .svg-container .modebar{
+    z-index: -100;
+}
+
+.dashboard-container .dashboard-container-graph{
+    border-radius: 5px;
+    width: 68.4%;
+    border: 1px solid rgb(216, 216, 216);
+}
+
+.dashboard-container .dashboard-container-gpio .Title h3{
+    font-size: 1.75rem;
+    color: rgb(66, 196, 247);
+    border-bottom: rgb(216, 216, 216);
+    margin-top: 3px;
+    margin-left: 10px;
+    margin-bottom: 3px;
+}
+
+.dashboard-container .dashboard-container-gpio .Title{
+    border-bottom: 1px solid rgb(216, 216, 216);
+}
+
+.dashboard-container .dashboard-container-gpio {
+    border-radius: 5px;
+    float: right;
+    height: 480px;
+    width: 280px;
+    margin-left: 0px;
+    border: 1px solid rgb(216, 216, 216);
+}
+
+.dashboard-container{
+    margin-bottom: 0;  
+}
+
+.container-gpio{
+    padding: 4px;
+    border-bottom: 1px solid rgb(216, 216, 216);
+}
+
+.gpio-message{
+    text-align: center;
+}
+
+.footer{
+    margin: 0;
+    padding-top: 10px;
+    text-align: center;
+}
