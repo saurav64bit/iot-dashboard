@@ -4,14 +4,11 @@ import dash_daq as daq
 import dash_core_components as dcc
 import dash_html_components as html
 from dash.dependencies import Output, Input
-import plotly
-import plotly.graph_objs as go
-from collections import deque
-import random
-import pandas
+
 from boltiot import Bolt
 import json
-api_key = "f18c7b40-fcaf-43e8-8c13-024cbdced678"    
+
+api_key = "a62054a7-57eb-47fb-b652-0e51d5c869fe"    
 device_id  = "BOLT3852787"  
 mybolt = Bolt(api_key, device_id)
 
@@ -21,7 +18,7 @@ external_stylesheets = ["https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/s
 
 
 
-app = dash.Dash('IoT Dashboard', external_stylesheets=external_stylesheets)
+app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
 server = app.server
 app.title = "IoT Dashboard"
 
@@ -33,13 +30,6 @@ auth = dash_auth.BasicAuth(
     app,
     VALID_USERNAME_PASSWORD_PAIRS
 )
-
-
-X = deque(maxlen=20)
-X.append(1)
-Y = deque(maxlen=20)
-Y.append(1)
-
 
 app.layout = html.Div([
     html.Div([
@@ -55,13 +45,22 @@ app.layout = html.Div([
             html.Div([
                 html.H3("Temperature (Celsius)")
             ], className='Title'),
-            # Graph
+            # Thermometer
             html.Div([
-                dcc.Graph(id='temperature-graph', animate=True),
+                daq.Thermometer(
+                	id='thermometer',
+				    min=0,
+    				max=100,
+    				showCurrentValue=True,
+    				units="C",
+    				color='red',
+    				height=300,
+    				style={'paddingTop':'28px'},
+				), 
             ], className='twelve columns graph'),
             dcc.Interval(
-                id='temperature-graph-update', 
-                interval=5*1000, 
+                id='update-thermometer', 
+                interval=60*1000, 
             ),
         ], className='seven columns dashboard-container-graph'),
 
@@ -146,30 +145,12 @@ app.layout = html.Div([
 ])
 
 # Callback for Temperature Graph
-@app.callback(Output('temperature-graph', 'figure'),
-              [Input('temperature-graph-update', 'n_intervals')])
-def update_graph_scatter(input_data):
-    X.append(X[-1]+1)
-    Y.append(100*int(json.loads(mybolt.analogRead("A0"))['value'])/1024)
+@app.callback(Output('thermometer', 'value'),
+              [Input('update-thermometer', 'n_intervals')])
+def update_thermometer(input_data):
+	temp = 100*int(json.loads(mybolt.analogRead("A0"))['value'])/1024
 
-    data = plotly.graph_objs.Scatter(
-            x=list(X),
-            y=list(Y),
-            name='Scatter',
-            mode= 'lines+markers'
-            )
-    layout = go.Layout(
-                xaxis=dict(
-                    range=[min(X),max(X)],
-                    title='Timestamp'
-                ),
-                yaxis=dict(
-                    range=[min(Y),max(Y)],
-                    title='Temperature (Celsius)'
-                )
-            )
-
-    return {'data': [data],'layout' : layout }
+	return temp
 
 # Callback for GPIO 0
 @app.callback(
@@ -233,4 +214,4 @@ def update_output(on):
 
 ################ Run Server ################
 if __name__ == '__main__':
-    app.run_server()
+    app.run_server(debug=True)
